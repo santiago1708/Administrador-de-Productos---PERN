@@ -1,0 +1,19 @@
+{
+  "name": "rest_api_server",
+  "version": "1.0.0",
+  "description": "Rest Api´s con Express y TypeScript",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/santiago1708/Administrador-de-Productos---PERN.git"
+  },
+  "author": "Santiago vela Dev",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/santiago1708/Administrador-de-Productos---PERN/issues"
+  },
+  "homepage": "https://github.com/santiago1708/Administrador-de-Productos---PERN#readme"
+}
