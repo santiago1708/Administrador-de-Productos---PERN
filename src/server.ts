@@ -4,15 +4,14 @@ import router from './router'
 import db from './config/db'
 
 /* Conect to DB */
-async function connectDB() {
+export async function connectDB() {
     try {
         await db.authenticate()
         db.sync()
-        console.log(colors.yellow.bold("DB is connected"));
+        /* console.log(colors.yellow.bold("DB is connected")); */
     } catch (error) {
-        console.log(error)
-        console.log(colors.red.bold.italic("Error al conectar a la BD"));
-        
+        /* console.log(error) */
+        console.log(colors.red.bold.italic("Error al conectar a la BD"))
     }
 }
 
@@ -27,5 +26,8 @@ server.use(express.json())
 
 server.use('/api/products', router)
 
+server.get('/api', (req, res) => {
+    res.send({msg: "Desde API"})
+})
 
 export default server 

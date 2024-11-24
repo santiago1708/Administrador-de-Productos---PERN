@@ -35,7 +35,6 @@ router.put('/:id',
         .notEmpty().withMessage("el precio del producto no puede ir vacio"),
     body('availability').isBoolean().withMessage("Valor para disponibilidad no valido"),
     handleInputErrors,
-
     updateProduct
 )
 router.patch('/:id', 

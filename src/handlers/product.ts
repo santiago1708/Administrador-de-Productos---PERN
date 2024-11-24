@@ -4,48 +4,34 @@ import Product from '../models/Product.model'
 
 
 export const getProducts = async (req: Request, res: Response) => {
-
-    try {
-        const products = await Product.findAll({
-            attributes: {
-                exclude: ["createdAt", "updatedAt"]
-            }
-        })
-        res.send({ data: products })
-    } catch (error) {
-        console.log(error)
-    }
+    const products = await Product.findAll({
+        attributes: {
+            exclude: ["createdAt", "updatedAt"]
+        }
+    })
+    res.send({ data: products })
 }
 
 export const getProductsById = async (req: Request, res: Response) => {
-
-    try {
-        const { id } = req.params
-        const product = await Product.findByPk(id, {
-            attributes: {
-                exclude: ["createdAt", "updatedAt"]
-            }
-        })
-
-        if (!product) {
-            res.status(404).send({ message: 'Product not found' })
-            return
+    const { id } = req.params
+    const product = await Product.findByPk(id, {
+        attributes: {
+            exclude: ["createdAt", "updatedAt"]
         }
+    })
 
-        res.send({ data: product });
-
-    } catch (error) {
-        console.log(error)
+    if (!product) {
+        res.status(404).send({ message: 'Product not found' })
+        return
     }
+
+    res.send({ data: product });
 }
 
 export const createProduct = async (req: Request, res: Response) => {
-    try {
-        const product = await Product.create(req.body)
-        res.send({ data: product })
-    } catch (error) {
-        console.log(error);
-    }
+    
+    const product = await Product.create(req.body)
+    res.status(201).send({ data: product })
 }
 
 export const updateProduct = async (req: Request, res: Response) => {

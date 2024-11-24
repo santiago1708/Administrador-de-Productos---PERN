@@ -4,8 +4,10 @@
   "description": "Rest Api´s con Express y TypeScript",
   "main": "index.js",
   "scripts": {
-    "test": "jest",
-    "dev": "nodemon --exec tsx src/index.ts"
+    "test": "jest --detectOpenHandles",
+    "test:coverage": "npm run pretest && jest --detectOpenHandles --coverage",
+    "dev": "nodemon --exec tsx src/index.ts",
+    "pretest" : "tsx ./src/data --clear"
   },
   "repository": {
     "type": "git",
