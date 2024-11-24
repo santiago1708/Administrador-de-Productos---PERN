@@ -1,4 +1,5 @@
 import swaggerJSDoc from "swagger-jsdoc";
+import { SwaggerUiOptions } from "swagger-ui-express";
 
 const options:swaggerJSDoc.Options = {
     swaggerDefinition: {
@@ -22,4 +23,21 @@ const options:swaggerJSDoc.Options = {
 
 const swaggerSpec = swaggerJSDoc(options)
 
+const swaggerUiOptions:SwaggerUiOptions = {
+    customCss: `
+        .topbar-wrapper .link {
+            content: url('https://www.creativefabrica.com/wp-content/uploads/2021/08/24/Flying-Phoenix-Fire-Bird-Abstract-Logo-Graphics-16278834-1.jpg');
+            height: auto;
+            width: auto;
+        }
+        .swagger-ui .topbar {
+            background-color: black;
+        }
+    `,
+    customSiteTitle: "Documentacion REST API Express / TypeScript"
+}
+
 export default swaggerSpec;
+export {
+    swaggerUiOptions
+}

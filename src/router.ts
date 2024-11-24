@@ -89,6 +89,40 @@ router.get('/:id',
     handleInputErrors,
     getProductsById
 )
+
+/**
+ * @swagger
+ *  /api/products:
+ *      post: 
+ *          summary: Creates a new Product
+ *          tags: 
+ *              - Products
+ *          description: Returns a new record in the Database
+ *          requestBody: 
+ *              required: true
+ *              content: 
+ *                  application/json:
+ *                      schema: 
+ *                          type: object
+ *                          properties: 
+ *                              name: 
+ *                                  type: string
+ *                                  example: "monitor curvo 49 pulgadas" 
+ *                              price: 
+ *                                  type: number
+ *                                  example: 399
+ *  
+ *          responses: 
+ *              201: 
+ *                  description: Product updated successfully
+ *                  content: 
+ *                      application/json:
+ *                          schema: 
+ *                              $ref: '#/components/schemas/product'
+ *              400: 
+ *                  description: Bad request - Invalid input data
+ */
+
 router.post('/',
     /* Validacion */
     body('name')
@@ -99,6 +133,51 @@ router.post('/',
     handleInputErrors,
     createProduct
 )
+
+/**
+ * @swagger
+ *  /api/products/{id}: 
+ *      put: 
+ *          sumary: Updates a product with user input
+ *          tags: 
+ *              - Products 
+ *          description: Returns the updated product 
+ *          parameters:
+ *            - in: path
+ *              name: id 
+ *              description: the ID of the Product to retrieve
+ *              required: true
+ *              schema: 
+ *                  type: integer
+ *          requestBody: 
+ *              required: true
+ *              content: 
+ *                  application/json:
+ *                      schema: 
+ *                          type: object
+ *                          properties: 
+ *                              name: 
+ *                                  type: string
+ *                                  example: "monitor curvo 49 pulgadas" 
+ *                              price: 
+ *                                  type: number
+ *                                  example: 399
+ *                              availability: 
+ *                                  type: boolean
+ *                                  example: true
+ *          responses: 
+ *              200: 
+ *                  description: Product updated successfully
+ *                  content: 
+ *                      application/json:
+ *                          schema: 
+ *                              $ref: '#/components/schemas/product'
+ *              400: 
+ *                  description: Bad request - Invalid Id or Input Data
+ *              404: 
+ *                  description: Product Not Found
+ */
+
 router.put('/:id',
     param('id')
         .isInt().withMessage('ID no valido'),
@@ -111,12 +190,75 @@ router.put('/:id',
     handleInputErrors,
     updateProduct
 )
+
+/** 
+ * @swagger
+ * /api/products/{id}:
+ *      patch: 
+ *          sumary: Update product availability
+ *          tags: 
+ *              - Products
+ *          description: Returns the updated availability
+ *          parameters:
+ *            - in: path
+ *              name: id 
+ *              description: the ID of the Product to retrieve
+ *              required: true
+ *              schema: 
+ *                  type: integer
+ *          responses: 
+ *              200: 
+ *                  description: Successfully responses
+ *                  content: 
+ *                      application/json:
+ *                          schema: 
+ *                              $ref: '#/components/schemas/product'
+ *              400: 
+ *                  description: Bad request - Invalid Id 
+ *              404: 
+ *                  description: Product Not Found
+ * 
+ * 
+*/
+
 router.patch('/:id', 
     param('id')
         .isInt().withMessage('ID no valido'),
     handleInputErrors,
     updateAvailability
 )
+
+/** 
+ * @swagger
+ * /api/products/{id}:
+ *      delete: 
+ *          sumary: Deletes a product by a given ID 
+ *          tags: 
+ *              - Products
+ *          description: Returns a confirmation message
+ *          parameters:
+ *            - in: path
+ *              name: id 
+ *              description: the ID of the Product to delete
+ *              required: true
+ *              schema: 
+ *                  type: integer
+ *          responses: 
+ *              200: 
+ *                  description: Successfully responses
+ *                  content: 
+ *                     application/json:
+ *                          schema: 
+ *                              type: string
+ *                              value: "Product deleted successfully"
+ *              400: 
+ *                  description: Bad request - Invalid Id 
+ *              404: 
+ *                  description: Product Not Found
+ * 
+ * 
+*/
+
 router.delete('/:id', 
     param('id')
         .isInt().withMessage('ID no valido'),
